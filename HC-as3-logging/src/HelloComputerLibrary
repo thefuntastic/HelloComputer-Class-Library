@@ -1,0 +1,82 @@
+package 
+{
+	import flash.display.SimpleButton;
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	import flash.events.Event;
+	import net.hellocomputer.logging.impl.OutputPanelTarget;
+	import net.hellocomputer.logging.impl.ServerLogTarget;
+	import net.hellocomputer.logging.LogLevel;
+	import org.as3commons.logging.util.here;
+	
+	import net.hellocomputer.logging.impl.Monster3Target;
+	
+	import net.hellocomputer.logging.Log;
+	
+	import org.as3commons.logging.api.LOGGER_FACTORY;
+	import org.as3commons.logging.setup.SimpleTargetSetup;
+	import org.as3commons.logging.setup.target.FatalBuffer;
+	import org.as3commons.logging.setup.target.FlashConsoleTarget;
+	import org.as3commons.logging.setup.target.MergedTarget;
+	import org.as3commons.logging.setup.target.MonsterDebugger3LogTarget;
+	import org.as3commons.logging.setup.target.MonsterDebugger3TraceTarget;
+	import org.as3commons.logging.setup.target.TraceTarget;
+	
+	import org.as3commons.logging.simple.info;
+	
+	public class HelloComputerLibrary extends Sprite
+	{
+		public var bar:Number = 123;
+		public var foo:String = "text";
+		
+		public function HelloComputerLibrary()
+		{
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
+			
+			//LOGGER_FACTORY.setup = new SimpleTargetSetup(new TraceTarget("{logLevel} - {name} - {message}" ));
+			//Log.setup(new SimpleTargetSetup(new MonsterDebugger3TraceTarget(this)));
+			if (CONFIG::debug == true)
+			{
+				Log.setup(new SimpleTargetSetup(new MergedTarget(new Monster3Target(this), new OutputPanelTarget())), true);
+			}
+			else
+			{
+				//Log.setup(new SimpleTargetSetup(new TraceTarget()));
+				Log.setup(new SimpleTargetSetup(new ServerLogTarget("http://localhost/proto/server_log/fl_log.php")));
+				
+			}
+			
+			
+			//LOGGER_FACTORY.setup = null;
+			
+			var arr:Array = ["new", ["new prop", 'prop two'], "Array"];
+			var str:String  = arr.toString();
+			printf("this is my test message", ["testing"], LogLevel.ERROR);
+			printf("how do params {0} work?", ["hello"], LogLevel.INFO);
+			logNamed("Peter", arr, LogLevel.INFO);
+			//trace(arr);
+			var e:Event = new Event(Event.CHANGE, true);
+			
+			
+			//var sp:Sprite = Draw.drawRect(100, 100);
+			//addChild(sp);
+			
+			printf("how do params {0} work?", ["hello"]);
+			
+			logNamed("Peter", "how do you do", LogLevel.INFO);
+			logNamed("Peter", here());
+			
+			printf("this is a test of {0}", [ "value"], LogLevel.FATAL);
+			
+			
+			//trace(formatToString(this, "width", "height"));
+			
+			printfNamed("Peter", "This is my {0} message", [e], LogLevel.WARN);
+			
+			
+		}
+
+	}
+}

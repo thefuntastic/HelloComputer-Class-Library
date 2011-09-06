@@ -1,0 +1,31 @@
+<apiPackage id="__Global__"><apiName>__Global__</apiName><apiDetail/><apiOperation id="globalOperation:logNamed"><apiName>logNamed</apiName><shortdesc>
+	 This is exactly the same as log, but creates a logger using the name of the person who created it.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>Name of the person who wrote the log statement. 
+	 </apiDesc></apiParam><apiParam><apiItemName>message</apiItemName><apiType value="int"/><apiDesc>
+	 </apiDesc></apiParam><apiParam><apiItemName>level</apiItemName><apiType value=""/><apiData>0x0020</apiData><apiDesc> </apiDesc></apiParam></apiOperationDef><apiDesc>
+	 This is exactly the same as log, but creates a logger using the name of the person who created it. 
+	 This makes it much easier to filter results when working in a team
+	 </apiDesc></apiOperationDetail><related-links><link href="" invalidHref="log.xml"><linktext>log</linktext></link></related-links></apiOperation><apiOperation id="globalOperation:printf"><apiName>printf</apiName><shortdesc>
+	 Top level function that provides access to the logging package without the need to import anything!
+	 This function is much like php in that it provides string subsitution making formating trace statements easier.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>message</apiItemName><apiType value=""/><apiDesc>The string or object to be logged
+	 </apiDesc></apiParam><apiParam><apiItemName>params</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>an array of params to be substituted into the string message. 
+	 "The instance {0}, has {1} children", [this.name, this.numChildren] 
+	 //The instance _mcContainer has 5 children
+	 </apiDesc></apiParam><apiParam><apiItemName>level</apiItemName><apiType value="int"/><apiData>0x0020</apiData><apiDesc>See LogLevel for valid types, defaults to DEBUG
+	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+	 Top level function that provides access to the logging package without the need to import anything!
+	 This function is much like php in that it provides string subsitution making formating trace statements easier.
+	 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="globalOperation:printfNamed"><apiName>printfNamed</apiName><shortdesc>
+	 This is exactly the same as printf, but creates a logger using the name of the person who created it.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>Name of the person who wrote the log statement. 
+	 </apiDesc></apiParam><apiParam><apiItemName>message</apiItemName><apiType value="Array"/><apiDesc>
+	 </apiDesc></apiParam><apiParam><apiItemName>params</apiItemName><apiType value="int"/><apiData>null</apiData><apiDesc> </apiDesc></apiParam><apiParam><apiItemName>level</apiItemName><apiType value=""/><apiData>0x0020</apiData><apiDesc> </apiDesc></apiParam></apiOperationDef><apiDesc>
+	 This is exactly the same as printf, but creates a logger using the name of the person who created it. 
+	 This makes it much easier to filter results when working in a team
+	 </apiDesc></apiOperationDetail><related-links><link href="" invalidHref="log.xml"><linktext>log</linktext></link></related-links></apiOperation><apiOperation id="globalOperation:log"><apiName>log</apiName><shortdesc>
+	 Top level function that provides access to the logging package without the need to import anything!
+	 
+	 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>message</apiItemName><apiType value=""/><apiDesc>The string or object to be logged
+	 </apiDesc></apiParam><apiParam><apiItemName>level</apiItemName><apiType value="int"/><apiData>0x0020</apiData><apiDesc>an array of params to be substituted into the string message. "The instance {0}, has {1} children", [this.name, this.numChildren] //The instance _mcContainer has 5 children
+	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+	 Top level function that provides access to the logging package without the need to import anything!
+	 
+	 </apiDesc></apiOperationDetail></apiOperation></apiPackage>

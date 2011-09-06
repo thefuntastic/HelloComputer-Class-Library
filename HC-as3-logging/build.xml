@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project name="Ant Test" default="run_main" basedir=".">
+	
+	<!-- Link to the defined variables in build.properties -->
+	<property file="build.properties"/>
+	
+	<!-- Provides a valid ref to flex.home. -->
+	<property name="flex.home" location="${env.FLEX_HOME}"/>
+	
+	<target name="init" description="makes sure output directory exists">
+		<echo>Creating output directory</echo>
+		<mkdir dir="${bin}"/>
+	</target>
+
+	<!-- Seems compc doesn't recognise playerglobal.swc. Included the 10.1 version -->
+	<target name="compile_exec" depends="init" description="compile swc">
+		<exec executable="${flex.home}${file.separator}bin${file.separator}compc.exe">
+			<arg line="-is '${src}'"/>
+			<arg line="-external-library-path='${lib}'"/>
+			<arg line="-incremental=false"/>
+			<arg line="-o '${bin}/${program.name}.swc'"/>
+		</exec>
+	</target>
+	
+	
+	<!-- To be used if any external packages need to be excluded -->
+	<target name="list_exclude_classes"
+				description="creates a list of classes we can then exclude from asDoc compilation, we need to do this becuase asdoc cannot exclude dependencies from -doc-sources">
+				<fileset id="sources" dir="${basedir}/lib/src">
+					<include name="**/*.as"/>
+				</fileset>
+				<pathconvert property="classes" pathsep="," refid="sources">
+						<mapper>
+							<chainedmapper>
+								<!-- Strip the filepaths prepending the package structure -->
+								<globmapper from="${lib}${file.separator}src${file.separator}*" to="*"/>
+								<!-- Turn the paths into package paths and strip the .as  -->
+								<packagemapper from="*.as" to="*"/>
+							</chainedmapper>
+						</mapper>
+				</pathconvert>
+				<echo>${classes}</echo>
+		</target>
+
+	<!-- Oddball note, command line booleans must be specified with = (equals operator) -->
+	<target name="doc" description="create asdocs for the app from the source directory" depends="">
+		<delete dir="${docs}"/>
+		<mkdir dir="${docs}"/>
+		<exec executable="${flex.home}/bin/asdoc.exe" dir="${basedir}" >
+			<arg line="-keep-xml" />
+			<arg line="-skip-xsl" />
+			<arg line="-sp '${src}'"/>
+			<arg line="-doc-sources '${src}'"/>
+			<arg line="-external-library-path='${lib}'"/>
+			<arg line="-exclude-classes='HelloComputerLibrary'"/>
+			<arg line="-output '${docs}'"/>
+			<arg line="-main-title 'HelloComputer API'"/>
+			<arg line="-lenient=true"/>
+		</exec>
+		<!-- update swc with asdoc comments. This seems to happen by default -->
+		<zip destfile="${bin}/${program.name}.swc" update="true">
+			<zipfileset dir="${docs}/tempdita" prefix="docs">
+				<include name="*.*"/>
+				<exclude name="ASDoc_Config.xml"/>
+				<exclude name="overviews.xml"/>
+			</zipfileset>
+		</zip>
+	</target>
+	
+</project>
+

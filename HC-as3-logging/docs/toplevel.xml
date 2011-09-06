@@ -1,0 +1,308 @@
+<asdoc>
+
+<classRec name='LogLevel' fullname='net.hellocomputer.logging:LogLevel' sourcefile='D:\_Resources\Web -  AS3 Library\HelloComputer Library\HC-as3-logging\src\net\hellocomputer\logging\LogLevel.as' namespace='net.hellocomputer.logging' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 This simply provide a nicer implementation of the as3 commons log library that autocompletes nicely
+
+	 ]]></description>
+<author><![CDATA[Peter Cardwell-Gardner
+
+	 ]]></author>
+</classRec>
+<field name='DEBUG' fullname='net.hellocomputer.logging:LogLevel/DEBUG' type='int' isStatic='true' isConst='true' defaultValue='0x0020' >
+</field>
+<field name='ERROR' fullname='net.hellocomputer.logging:LogLevel/ERROR' type='int' isStatic='true' isConst='true' defaultValue='0x0004' >
+</field>
+<field name='FATAL' fullname='net.hellocomputer.logging:LogLevel/FATAL' type='int' isStatic='true' isConst='true' defaultValue='0x0002' >
+</field>
+<field name='INFO' fullname='net.hellocomputer.logging:LogLevel/INFO' type='int' isStatic='true' isConst='true' defaultValue='0x0010' >
+</field>
+<field name='WARN' fullname='net.hellocomputer.logging:LogLevel/WARN' type='int' isStatic='true' isConst='true' defaultValue='0x0008' >
+</field>
+<classRec name='Log' fullname='net.hellocomputer.logging:Log' sourcefile='D:\_Resources\Web -  AS3 Library\HelloComputer Library\HC-as3-logging\src\net\hellocomputer\logging\Log.as' namespace='net.hellocomputer.logging' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 ...
+
+	 ]]></description>
+<author><![CDATA[Peter Cardwell-Gardner
+
+	 ]]></author>
+</classRec>
+<method name='Log' fullname='net.hellocomputer.logging:Log/Log' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+</method>
+<method name='setup' fullname='net.hellocomputer.logging:Log/setup' isStatic='true' isFinal='false' isOverride='false'  param_names='logSetup;smartLogging' param_types='org.as3commons.logging.api:ILogSetup;Boolean' param_defaults='null;false' result_type='void'>
+<description><![CDATA[
+
+		 This is a neater wrapper for as3commons logging initialisation setup. Also allows to init a few extra params
+
+		 ]]></description>
+<param><![CDATA[logSetup As3 commons log setup, refer to as3 commons documentation. 
+
+		 You can do a whole bunch of useful stuff with these. 
+
+		 Like merging targets, having targets that only log certain levels of event, 
+
+		 targets that only fire when a certain log level is reached.s
+
+		 ]]></param>
+<param><![CDATA[smartLogging This will attempt find the source of the log statement using a stack trace. 
+
+		 This can incur quite a performance penalty, and cause errors with debug builds so is left as an optional parameter.
+
+		 ]]></param>
+</method>
+<method name='smartLog' fullname='net.hellocomputer.logging:Log/smartLog' isStatic='true' isFinal='false' isOverride='false'  param_names='message;params;level;name' param_types=';Array;int;String' param_defaults='undefined;null;0x0020;null' result_type='void'>
+</method>
+<method name='smartLogging' fullname='net.hellocomputer.logging:Log/smartLogging/get' isStatic='true' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='smartLogging' fullname='net.hellocomputer.logging:Log/smartLogging/set' isStatic='true' isFinal='false' isOverride='false'  param_names='value' param_types='Boolean' param_defaults='undefined' result_type='void'>
+</method>
+<field name='_smartLogging' fullname='net.hellocomputer.logging:Log/private:_smartLogging' type='Boolean' isStatic='true' isConst='false' >
+</field>
+<method name='logNamed' fullname='logNamed' isStatic='false' isFinal='false' isOverride='false'  param_names='name;message;level' param_types='String;int' param_defaults='undefined;undefined;0x0020' result_type='void'>
+<description><![CDATA[
+
+	 This is exactly the same as log, but creates a logger using the name of the person who created it. 
+
+	 This makes it much easier to filter results when working in a team
+
+	 ]]></description>
+<param><![CDATA[name Name of the person who wrote the log statement. 
+
+	 ]]></param>
+<param><![CDATA[message 
+
+	 ]]></param>
+<param><![CDATA[level
+
+	 ]]></param>
+<see><![CDATA[log
+
+	 ]]></see>
+</method>
+<method name='printf' fullname='printf' isStatic='false' isFinal='false' isOverride='false'  param_names='message;params;level' param_types=';Array;int' param_defaults='undefined;null;0x0020' result_type='void'>
+<description><![CDATA[
+
+	 Top level function that provides access to the logging package without the need to import anything!
+
+	 This function is much like php in that it provides string subsitution making formating trace statements easier.
+
+	 ]]></description>
+<param><![CDATA[message The string or object to be logged
+
+	 ]]></param>
+<param><![CDATA[params an array of params to be substituted into the string message. 
+
+	 "The instance {0}, has {1} children", [this.name, this.numChildren] 
+
+	 //The instance _mcContainer has 5 children
+
+	 ]]></param>
+<param><![CDATA[level See LogLevel for valid types, defaults to DEBUG
+
+	 ]]></param>
+</method>
+<method name='printfNamed' fullname='printfNamed' isStatic='false' isFinal='false' isOverride='false'  param_names='name;message;params;level' param_types='String;Array;int' param_defaults='undefined;undefined;null;0x0020' result_type='void'>
+<description><![CDATA[
+
+	 This is exactly the same as printf, but creates a logger using the name of the person who created it. 
+
+	 This makes it much easier to filter results when working in a team
+
+	 ]]></description>
+<param><![CDATA[name Name of the person who wrote the log statement. 
+
+	 ]]></param>
+<param><![CDATA[message 
+
+	 ]]></param>
+<param><![CDATA[params
+
+	 ]]></param>
+<param><![CDATA[level
+
+	 ]]></param>
+<see><![CDATA[log
+
+	 ]]></see>
+</method>
+<method name='log' fullname='log' isStatic='false' isFinal='false' isOverride='false'  param_names='message;level' param_types=';int' param_defaults='undefined;0x0020' result_type='void'>
+<description><![CDATA[
+
+	 Top level function that provides access to the logging package without the need to import anything!
+
+	 
+
+	 ]]></description>
+<param><![CDATA[message The string or object to be logged
+
+	 ]]></param>
+<param><![CDATA[params an array of params to be substituted into the string message. "The instance {0}, has {1} children", [this.name, this.numChildren] //The instance _mcContainer has 5 children
+
+	 ]]></param>
+<param><![CDATA[level See LogLevel for valid types, defaults to DEBUG
+
+	 ]]></param>
+</method>
+<classRec name='OutputPanelTarget' fullname='net.hellocomputer.logging.impl:OutputPanelTarget' sourcefile='D:\_Resources\Web -  AS3 Library\HelloComputer Library\HC-as3-logging\src\net\hellocomputer\logging\impl\OutputPanelTarget.as' namespace='net.hellocomputer.logging.impl' access='public' baseclass='Object' interfaces='org.as3commons.logging.setup.target:IFormattingLogTarget' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+	 <code>TraceTarget</code> renders log statements with the <code>trace()</code> method. 
+
+	 
+
+	 ]]></description>
+<author><![CDATA[Christophe Herreman
+
+	 ]]></author>
+<author><![CDATA[Martin Heidegger
+
+	 ]]></author>
+<version><![CDATA[2.0
+
+	 ]]></version>
+</classRec>
+<method name='OutputPanelTarget' fullname='net.hellocomputer.logging.impl:OutputPanelTarget/OutputPanelTarget' isStatic='false' isFinal='false' isOverride='false'  param_names='format' param_types='String' param_defaults='null' result_type='*'>
+<description><![CDATA[
+
+		 Creates a new <code>TraceTarget</code> instance.
+
+		 
+
+		 ]]></description>
+<param><![CDATA[format Default format to for the logging, if null, it will use
+
+		        the <code>DEFAULT_FORMAT</code>.
+
+		 ]]></param>
+</method>
+<method name='color' fullname='net.hellocomputer.logging.impl:OutputPanelTarget/protected:color' isStatic='false' isFinal='false' isOverride='false'  param_names='formatted;level' param_types='String;int' param_defaults='undefined;undefined' result_type='String'>
+</method>
+<method name='log' fullname='net.hellocomputer.logging.impl:OutputPanelTarget/log' isStatic='false' isFinal='false' isOverride='false'  param_names='name;shortName;level;timeStamp;message;parameters;person' param_types='String;String;int;Number;Array;String' param_defaults='undefined;undefined;undefined;undefined;undefined;undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+</method>
+<method name='format' fullname='net.hellocomputer.logging.impl:OutputPanelTarget/format/set' isStatic='false' isFinal='false' isOverride='false'  param_names='format' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+</method>
+<field name='DEFAULT_FORMAT' fullname='net.hellocomputer.logging.impl:OutputPanelTarget/DEFAULT_FORMAT' type='String' isStatic='true' isConst='false' defaultValue='{logLevel} - {shortName}{atPerson} - {message}' >
+<description><![CDATA[ Default format to be used for formatting statements. ]]></description>
+</field>
+<field name='_formatter' fullname='net.hellocomputer.logging.impl:OutputPanelTarget/private:_formatter' type='org.as3commons.logging.util:LogMessageFormatter' isStatic='false' isConst='false' >
+<description><![CDATA[ Formatter to render the log statements ]]></description>
+</field>
+<classRec name='Monster3Target' fullname='net.hellocomputer.logging.impl:Monster3Target' sourcefile='D:\_Resources\Web -  AS3 Library\HelloComputer Library\HC-as3-logging\src\net\hellocomputer\logging\impl\Monster3Target.as' namespace='net.hellocomputer.logging.impl' access='public' baseclass='Object' interfaces='org.as3commons.logging.setup.target:IColorableLogTarget' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 Slightly more elegant version of the AS3 logger. 
+
+	 
+
+	 <p>The Monster Debugger is an alternative way to display your logging statements.</p>
+
+	 
+
+	 ]]></description>
+<author><![CDATA[Tim Keir
+
+	 ]]></author>
+<author><![CDATA[Martin Heidegger
+
+	 ]]></author>
+<since><![CDATA[2.5
+
+	 ]]></since>
+<see><![CDATA[http://demonsterdebugger.com/asdoc/com/demonsters/debugger/MonsterDebugger.html#trace()
+
+	 ]]></see>
+</classRec>
+<method name='Monster3Target' fullname='net.hellocomputer.logging.impl:Monster3Target/Monster3Target' isStatic='false' isFinal='false' isOverride='false'  param_names='target;address;callback;format;colors;depth' param_types=';String;Function;String;Object;int' param_defaults='undefined;127.0.0.1;null;null;null;5' result_type='*'>
+<description><![CDATA[
+
+		 Constructs a new <code>MonsterDebugger3Target</code>
+
+		 
+
+		 ]]></description>
+<param><![CDATA[format Default format used to render log statements.
+
+		 ]]></param>
+<param><![CDATA[colors Default colors used to color log statements.
+
+		 ]]></param>
+<param><![CDATA[depth Number of levels of recursion tracing nested objects (eg objects, xml)
+
+		 ]]></param>
+</method>
+<method name='log' fullname='net.hellocomputer.logging.impl:Monster3Target/log' isStatic='false' isFinal='false' isOverride='false'  param_names='name;shortName;level;timeStamp;message;parameters;person' param_types='String;String;int;Number;Array;String' param_defaults='undefined;undefined;undefined;undefined;undefined;undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+</method>
+<method name='colors' fullname='net.hellocomputer.logging.impl:Monster3Target/colors/set' isStatic='false' isFinal='false' isOverride='false'  param_names='colors' param_types='Object' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+</method>
+<method name='depth' fullname='net.hellocomputer.logging.impl:Monster3Target/depth/set' isStatic='false' isFinal='false' isOverride='false'  param_names='depth' param_types='int' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 Depth used to introspect objects.
+
+		 ]]></description>
+</method>
+<method name='format' fullname='net.hellocomputer.logging.impl:Monster3Target/format/set' isStatic='false' isFinal='false' isOverride='false'  param_names='format' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+</method>
+<field name='DEFAULT_COLORS' fullname='net.hellocomputer.logging.impl:Monster3Target/DEFAULT_COLORS' type='Object' isStatic='true' isConst='true' defaultValue='unknown' >
+<description><![CDATA[ Default colors used to color the output statements. ]]></description>
+</field>
+<field name='DEFAULT_FORMAT' fullname='net.hellocomputer.logging.impl:Monster3Target/DEFAULT_FORMAT' type='String' isStatic='true' isConst='true' defaultValue='{message}' >
+<description><![CDATA[ Default output format used to stringify log statements via MonsterDebugger.trace(). ]]></description>
+</field>
+<field name='_colors' fullname='net.hellocomputer.logging.impl:Monster3Target/private:_colors' type='Object' isStatic='false' isConst='false' >
+<description><![CDATA[ Colors used to display the messages. ]]></description>
+</field>
+<field name='_depth' fullname='net.hellocomputer.logging.impl:Monster3Target/private:_depth' type='int' isStatic='false' isConst='false' >
+<description><![CDATA[ Depth  ]]></description>
+</field>
+<field name='_formatter' fullname='net.hellocomputer.logging.impl:Monster3Target/private:_formatter' type='org.as3commons.logging.util:LogMessageFormatter' isStatic='false' isConst='false' >
+<description><![CDATA[ Formatter that renders the log statements via MonsterDebugger.trace(). ]]></description>
+</field>
+<classRec name='ServerLogTarget' fullname='net.hellocomputer.logging.impl:ServerLogTarget' sourcefile='D:\_Resources\Web -  AS3 Library\HelloComputer Library\HC-as3-logging\src\net\hellocomputer\logging\impl\ServerLogTarget.as' namespace='net.hellocomputer.logging.impl' access='public' baseclass='Object' interfaces='org.as3commons.logging.setup.target:IFormattingLogTarget' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 ...
+
+	 ]]></description>
+<author><![CDATA[Peter Cardwell-Gardner
+
+	 ]]></author>
+</classRec>
+<method name='ServerLogTarget' fullname='net.hellocomputer.logging.impl:ServerLogTarget/ServerLogTarget' isStatic='false' isFinal='false' isOverride='false'  param_names='url;bufferSize;format' param_types='String;int;String' param_defaults='undefined;50;null' result_type='*'>
+</method>
+<method name='log' fullname='net.hellocomputer.logging.impl:ServerLogTarget/log' isStatic='false' isFinal='false' isOverride='false'  param_names='name;shortName;level;timeStamp;message;parameters;person' param_types='String;String;int;Number;Array;String' param_defaults='undefined;undefined;undefined;undefined;undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='sendReport' fullname='net.hellocomputer.logging.impl:ServerLogTarget/private:sendReport' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='format' fullname='net.hellocomputer.logging.impl:ServerLogTarget/format/set' isStatic='false' isFinal='false' isOverride='false'  param_names='format' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+</method>
+<field name='DEFAULT_FORMAT' fullname='net.hellocomputer.logging.impl:ServerLogTarget/DEFAULT_FORMAT' type='String' isStatic='true' isConst='false' defaultValue='{logLevel} - {shortName}{atPerson} - {message}' >
+</field>
+<field name='_buffer' fullname='net.hellocomputer.logging.impl:ServerLogTarget/protected:_buffer' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='_formatter' fullname='net.hellocomputer.logging.impl:ServerLogTarget/private:_formatter' type='org.as3commons.logging.util:LogMessageFormatter' isStatic='false' isConst='false' >
+</field>
+<field name='_url' fullname='net.hellocomputer.logging.impl:ServerLogTarget/private:_url' type='String' isStatic='false' isConst='false' >
+</field>
+</asdoc>
