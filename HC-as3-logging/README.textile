@@ -1,0 +1,17 @@
+h1. HelloComputer Logging Api
+
+This is a small collection of api features and functions built on top of the very adaptable and flexible "as3commons.logging":http://www.as3commons.org/as3-commons-logging/index.html library. Mostly this was born out of a need to bend the as3 commons library our own way and make it as simple and clean to use in everyday usage - especially for developers with no previous experience with logging. 
+
+h2. Usage
+
+<pre><code>
+//Init in main class
+Log.setup(new SimpleTargetSetup(new TraceTarget()));
+
+//In your code
+log("Hello World", LogLevel.DEBUG);
+</code></pre>
+
+The initialisation is directly based on the as3 commons setup property. You can refer to their documentation for all the fun things you can do here. 
+
+Once your logger is setup for output, you can then use the log() function to call this anywhere in your code. This function does a lot of config under the hood to allow you to simply start marking detailed log statements. 
