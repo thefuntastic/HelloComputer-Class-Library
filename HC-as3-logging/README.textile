@@ -1,6 +1,6 @@
 h1. HelloComputer Logging Api
 
-This is a small collection of api features and functions built on top of the very adaptable and flexible "as3commons.logging":http://www.as3commons.org/as3-commons-logging/index.html library. Mostly this was born out of a need to bend the as3 commons library our own way and make it as simple and clean to use in everyday usage - especially for developers with no previous experience with logging. 
+This is a small collection of api features and functions built on top of the very adaptable and flexible "as3commons.logging":http://www.as3commons.org/as3-commons-logging/index.html library. Mostly this was born out of a need to bend the as3 commons library our own way and make it as simple and clean to use in everyday production - especially for developers with no previous experience with logging. 
 
 h2. Usage
 

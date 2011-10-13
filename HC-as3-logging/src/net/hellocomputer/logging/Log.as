@@ -1,5 +1,8 @@
 package net.hellocomputer.logging 
 {
+	import flash.display.LoaderInfo;
+	import flash.events.EventDispatcher;
+	import flash.events.UncaughtErrorEvent;
 	import flash.system.Capabilities;
 	import org.as3commons.logging.api.getLogger;
 	import org.as3commons.logging.api.ILogger;
@@ -8,13 +11,14 @@ package net.hellocomputer.logging
 	import org.as3commons.logging.setup.SimpleTargetSetup;
 	import org.as3commons.logging.setup.target.TraceTarget;
 	import org.as3commons.logging.simple.debug;
+	import org.as3commons.logging.util.locationFromStackTrace;
 	/**
 	 * ...
 	 * @author Peter Cardwell-Gardner
 	 */
 	public class Log 
 	{
-		private static var _smartLogging:Boolean;
+		protected static var _smartLogging:Boolean = false;
 		
 		public function Log() 
 		{
@@ -27,13 +31,11 @@ package net.hellocomputer.logging
 		 * You can do a whole bunch of useful stuff with these. 
 		 * Like merging targets, having targets that only log certain levels of event, 
 		 * targets that only fire when a certain log level is reached.s
-		 * @param	smartLogging This will attempt find the source of the log statement using a stack trace. 
-		 * This can incur quite a performance penalty, and cause errors with release builds/non debug players so is left as an optional parameter.
+		 * @param	
 		 */
-		public static function setup(logSetup:ILogSetup = null, smartLogging:Boolean = false):void
+		public static function set setup(logSetup:ILogSetup):void
 		{
 			LOGGER_FACTORY.setup = logSetup;
-			_smartLogging = smartLogging;
 		}
 		
 		public static function smartLog(message:*, params:Array = null, level:int = 0x0020, name:String=null):void
@@ -82,15 +84,43 @@ package net.hellocomputer.logging
 			}
 		}
 		
+		/**
+		 * smartLogging This will attempt find the source of the log statement using a stack trace. 
+		 * This can incur quite a performance penalty, and cause errors with release builds/non debug players so is left as an optional parameter.
+		 */
 		static public function get smartLogging():Boolean 
 		{
 			return _smartLogging;
 		}
 		
+		/**
+		 * @private
+		 */
 		static public function set smartLogging(value:Boolean):void 
 		{
 			_smartLogging = value;
 		}
+		
+		/**
+		 * Based directly off the the as3Loggins version, which is still available. The difference is that I don't want to kill error windows, 
+		 * as minimizes coverage and chances that a bug will get caught. 
+		 * @param	loaderInfo this should Ideally be the loader info the root
+		 */
+		static public function captureUncaughtEvents(loaderInfo:LoaderInfo):void
+		{
+			if( loaderInfo.hasOwnProperty("uncaughtErrorEvents") ) {
+				var events: EventDispatcher = loaderInfo["uncaughtErrorEvents"];
+				events.addEventListener( UncaughtErrorEvent.UNCAUGHT_ERROR, handleUncaughtError, false, 0, true );
+			}
+		}
+		
+		private static function handleUncaughtError(e:UncaughtErrorEvent):void 
+		{
+			var logger:ILogger = getLogger("UncaughtError");
+			logger.fatal( e["error"] );
+		}
+		
+		
 		
 	}
 

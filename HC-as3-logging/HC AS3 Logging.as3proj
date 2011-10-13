@@ -50,8 +50,8 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="lib\as3commons-logging-2.5.2.swc" />
     <element path="lib\MonsterDebugger.swc" />
+    <element path="lib\as3commons-logging-2.6.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
